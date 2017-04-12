@@ -34,4 +34,7 @@ then
 	echo "Something went wrong!. View log file"
 	exit 1
 fi
+echo "Clean all" 
+rm alpine-miniroo*
+git checkout -- Dockerfile
 exit 0
