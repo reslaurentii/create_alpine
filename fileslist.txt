@@ -1,0 +1,3 @@
+https://nl.alpinelinux.org/alpine/v3.5/releases/x86/alpine-minirootfs-3.5.2-x86.tar.gz
+https://nl.alpinelinux.org/alpine/v3.5/releases/x86/alpine-minirootfs-3.5.2-x86.tar.gz.asc
+https://nl.alpinelinux.org/alpine/v3.5/releases/x86/alpine-minirootfs-3.5.2-x86.tar.gz.sha256
