@@ -1,4 +1,5 @@
 #!/bin/bash
+#
 
 echo "import public key"
 gpg2 --keyserver pgp.mit.edu --recv 0482D84022F52DF1C4E7CD43293ACD0907D9495A 2>log
@@ -41,13 +42,17 @@ echo "        source_rootfs=\"https://www.alpinelinux.org/downloads/\" \\" >> Do
 echo "        alpine_version=""\""$name"-"$version"-"$arch"\"" >> Dockerfile
 echo "ADD alpine-minirootfs.tar.gz /">> Dockerfile
 
-docker build -t alpine_builder . | tee -a 2>&1 log
+buildName=$name.$verion.$arch
+echo "Create "$buildName" image."
+
+docker build -t $buildName . | tee -a 2>&1 log
 
 if [ ! $? -eq 0 ]
 then
 	echo "Something went wrong!. View log file"
 	exit 1
 fi
+
 echo "remove downloads"
 rm alpine-minirootfs*
 exit 0
