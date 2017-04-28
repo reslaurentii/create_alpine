@@ -8,10 +8,14 @@ The Root file system was signed by "Natanael Copa<ncopa@alpinelinux.org>"
 to create Dockerfile and image
 
 ```
-./create_alpinebit.sh [-a x86|x86_64] | 
+./create_alpinebit.sh [-a [x86|x86_64]] | [-f <file name>] | [-d] 
 ```
-The default is x86_64,i.e. intel 64bit
+The default values are 
+architecture: x86_64
+file: Dockerfile
 
+Script takes rootfs from repository, creates Dockerfile and creates Docker images.
+With -d option script doesn't create Docker images.
 
-- log: all standard and error output (It is overwritten every time script is launched)
-- Dockerfile: is created every time script is launched
+Warning: If you don't use dockerfile default name, take clean manually working directory. 
+
