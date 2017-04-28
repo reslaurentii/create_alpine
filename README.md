@@ -1,4 +1,4 @@
-# Alpine docker 32bits image created from scratch
+# Script to create Alpine docker images from scratch
 
 Root file system was taken from https://www.alpinelinux.org/downloads/
 
