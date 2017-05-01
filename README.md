@@ -30,21 +30,24 @@ To create Dockerfile and image
 ```
 ./create_alpinebit.sh
 ```
+It works with default paramaters.
 
 To show help online
 ```
 ./create_alpine -h
 create_alpine [options] [arguments]
+        -m <Dockerfile maintainer>      Name of Dockerfile maintener
         -r <root file system version>   Root File System Version.
-        -a x86|x86_64   choose architecture (default x86_64).
-        -f <file name>  name of generated Dockerfile (default Dockerfile).
-        -d              generate only Dockerfile and don't delete download files.
-        -q              quiet. No message to standard output.
-        -h              show this help.
+        -a x86|x86_64                   Choose architecture (default x86_64).
+        -f <file name>                  Name of generated Dockerfile (default Dockerfile).
+        -d                              Generate only Dockerfile and don't delete download files.
+        -q                              Quiet. No message to standard output.
+        -h                              Show this help.
 ```
 ## Parameters description
 ### Parameters with arguments
 The default values are:
+- -m maintener of Dockerfile. It is a label of dockerfile.It is a string. (Names Surname <email>)
 - -r alpine root file system version: 3.5.2
 - -a architecture: x86_64
 - -f Dockerfile name: Dockerfile
@@ -52,4 +55,8 @@ The default values are:
 ### Parameters without arguments
 - -d Don't execute steps 6 and 7. Script doesn't remove files and create docker image.
 - -q Execute without any message to standard output (For scripts)
--h show help
+- -h show help
+
+### Use script according your needs
+- edit configure file
+- use script parameters

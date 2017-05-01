@@ -1,0 +1,19 @@
+
+#######################################################################
+# Parameters.
+# Not editable Parameters.
+keyserver="pgp.mit.edu"
+keyid="0482D84022F52DF1C4E7CD43293ACD0907D9495A"
+name="alpine"
+
+# Editable parameters.
+# Edit parameters according to your needs or use script with parameters.
+version="3.5.2"
+arch="x86_64"
+maintainer="Gnaeus Pompeius Magnus <gnaeus@spqr>"
+dockerfile="Dockerfile"
+stop="NO"
+quiet="NO"
+
+logfile="log" #logfile can not overwritten by a option. There is no option for logfile.
+######################################################################

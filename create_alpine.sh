@@ -3,26 +3,17 @@
 # A POSIX variable
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
 
-# Initialize our own variables:
-name="alpine"
-version="3.5.2"
-arch="x86_64"
-dockerfile="Dockerfile"
-stop="NO"
-quiet="NO"
-logfile="log"
-
-keyserver="pgp.mit.edu"
-keyid="0482D84022F52DF1C4E7CD43293ACD0907D9495A"
+source configure
 
 function show_help {
 	echo -e "create_alpine [options] [arguments]"
+	echo -e "\t-m <Dockerfile maintainer>\tName of Dockerfile maintener"
 	echo -e "\t-r <root file system version>\tRoot File System Version."
-	echo -e "\t-a x86|x86_64\tchoose architecture (default x86_64)."
-	echo -e "\t-f <file name>\tname of generated Dockerfile (default Dockerfile)."
-	echo -e "\t-d \t\tgenerate only Dockerfile and don't delete download files."
-	echo -e "\t-q \t\tquiet. No message to standard output."
-	echo -e "\t-h \t\tshow this help."
+	echo -e "\t-a x86|x86_64\t\t\tChoose architecture (default x86_64)."
+	echo -e "\t-f <file name>\t\t\tName of generated Dockerfile (default Dockerfile)."
+	echo -e "\t-d \t\t\t\tGenerate only Dockerfile and don't delete download files."
+	echo -e "\t-q \t\t\t\tQuiet. No message to standard output."
+	echo -e "\t-h \t\t\t\tShow this help."
 }
 
 function error {
@@ -56,11 +47,12 @@ function doIt {
 	done
 
 	echo "verify image with sha256 digest"  | tee -a $logfile
-	sha256sum -c alpine*sha256* 2>>$logfile
-	[ ! $? -eq 0 ] && error
+	echo
+	sha256sum -c "alpine-minirootfs-"$version"-"$arch".tar.gz.sha256"  2>>$logfile
+	[ ! $? -eq 0 ] && error || echo "Passed"
 	echo "verify image with gpg2"  | tee -a $logfile
-	gpg2 --verify alpine*asc 2>>$logfile
-	[ ! $? -eq 0 ] && error
+	gpg2 --verify "alpine-minirootfs-"$version"-"$arch".tar.gz.asc" 2>>$logfile
+	[ ! $? -eq 0 ] && error || echo "Passed"
 
 	#mv alpine-minirootfs-*.tar.gz alpine-minirootfs.tar.gz 2>>$logfile
 
@@ -75,7 +67,7 @@ function doIt {
 	echo "# Alpine Linux "$version" with "$arch "architecture"         | tee -a $dockerfile $logfile
 	echo "#######################################################"     | tee -a $dockerfile $logfile
 	echo "FROM scratch"                                                | tee -a $dockerfile $logfile
-	echo "LABEL maintainer=\"Lorenzo Lobba <lorenzo@lobba.it>\" \\"    | tee -a $dockerfile $logfile
+	echo "LABEL maintainer=\""$maintainer"\" \\"    | tee -a $dockerfile $logfile
 	echo "source_rootfs=\"https://www.alpinelinux.org/downloads/\" \\" | tee -a $dockerfile $logfile
 	echo "alpine_version=""\""$name"-"$version"-"$arch"\""             | tee -a $dockerfile $logfile
 	echo "ADD alpine-minirootfs-"$version"-"$arch".tar.gz /"           | tee -a $dockerfile $logfile
@@ -99,19 +91,21 @@ function doIt {
 }
 
 echo "START "$(date -Ins)>$logfile
-while getopts "h?r:a:f:dq" opt; do
+while getopts "h?r:a:f:dqm:" opt; do
 	case "$opt" in
 		h|\?)
 		show_help
 		exit 0
 		;;
-		a)  arch=$OPTARG
+		a) arch=$OPTARG
 		;;
 		r) version=$OPTARG
 		;;
-		f)  dockerfile=$OPTARG
+		f) dockerfile=$OPTARG
 		;;
-		d)  stop="YES"
+		m) maintainer=$OPTARG
+		;;
+		d) stop="YES"
 		;;
 		q) quiet="YES"
 	esac
@@ -131,6 +125,6 @@ esac
 
 [ $quiet == "YES" ] && doIt >/dev/null || doIt
 [ $? -eq 1 ] && no_docker_image
-echo "END "$(date -Ins)> $logfile
+echo "END "$(date -Ins)>> $logfile
 
 exit 0
