@@ -20,7 +20,7 @@ The script makes these steps:
 1. A standard Linux distribution (Debian, Fedora, ...)
 2. gpg o gpg2
 3. wget
-4. Docker (However the part of the script calling docker command can be skipped.)
+4. Docker (Not strictly, because the part of the script calling docker commands can be skipped.)
 
 ## Howto execute script
 To create Dockerfile and image
@@ -28,7 +28,7 @@ To create Dockerfile and image
 ```
 ./create_alpinebit.sh
 ```
-It works with default paramaters.
+It works with default parameters.
 
 To show help online
 ```
@@ -45,7 +45,7 @@ create_alpine [options] [arguments]
 ## Parameters description
 ### Parameters with arguments
 The default values are:
-- -m maintener of Dockerfile. It is a label of dockerfile.It is a string. (Names Surname <email>)
+- -m maintener of Dockerfile. It is a label of dockerfile. It is a string. (Names Surname <email>)
 - -r alpine root file system version: 3.5.2
 - -a architecture: x86_64
 - -f Dockerfile name: Dockerfile
