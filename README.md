@@ -4,7 +4,7 @@ Script takes the original and ufficial Root file System from https://www.alpinel
 The script creates only dockerfile and docker image: It doesn't modify any file of root file system.
 
 The Root file system used by script it is the one signed by "Natanael Copa\<ncopa@alpinelinux.org\>"
-(His public key and his digest is available on https://www.alpinelinux.org/downloads/)
+(His public key and his digest are available on https://www.alpinelinux.org/downloads/)
 
 ## Description
 The script makes these steps:
