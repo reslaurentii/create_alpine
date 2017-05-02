@@ -1,11 +1,9 @@
 # Script to create Alpine docker images from scratch
 
-Root file system was taken from https://www.alpinelinux.org/downloads/.
-The Docker image is generated with original and ufficial Alpine Linux release.
-The script creates only dockerfile and docker images.
-It doesn't modify any file of root file system.
+Script takes the original and ufficial Root file System from https://www.alpinelinux.org/downloads/, creates Dockerfile and the Docker image.
+The script creates only dockerfile and docker image: It doesn't modify any file of root file system.
 
-The Root file system was signed by "Natanael Copa<ncopa@alpinelinux.org>"
+The Root file system used by script it is the one signed by "Natanael Copa\<ncopa@alpinelinux.org\>"
 (His public key and his digest is available on https://www.alpinelinux.org/downloads/)
 
 ## Description
