@@ -8,9 +8,9 @@ name="alpine"
 
 # Editable parameters.
 # Edit parameters according to your needs or use script with parameters.
-version="3.5.2"
+version="3.6.1"
 arch="x86_64"
-maintainer="Gnaeus Pompeius Magnus <gnaeus@spqr>"
+maintainer="Lorenzo Lobba <lorenzo@lobba.it>"
 dockerfile="Dockerfile"
 stop="NO"
 quiet="NO"
